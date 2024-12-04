@@ -82,7 +82,7 @@ entity:
 --- abstract
 
 This document specifies a format for key attestation claims to provide evidence of the security properties of
-trusted execution environments and secure elements in which private keys are stored. This evidence is intended
+trusted execution environments and secure elements in which private keys may be generated and stored. This evidence is intended
 to be used by a Relying Party, such as a Certification Authority (CA), as part of validating an incoming
 certificate signing request (CSR). The specification defines key claims using ASN.1 and CDDL.
 
@@ -90,8 +90,8 @@ certificate signing request (CSR). The specification defines key claims using AS
 
 # Introduction
 
-When a Certificate Signing Request (CSR) library requests a certificate from a Certification Authority (CA), a
-PKI end entity may wish to provide evidence of the security properties of the hardware security module where
+When a PKI End Entity provides a Certificate Signing Request (CSR) in requesting a certificate from a Certification Authority (CA), 
+that entity may wish to provide evidence of the security properties of the hardware security module where
 the private key resides. This evidence is verified by a Relying Party, such as a CA, as part of the CSR
 validation against a given certificate policy. [{{I-D.ietf-lamps-csr-attestation}}] specifies how to carry
 evidence within PKCS#10 [{{RFC2986}}] or Certificate Request Message Format (CRMF) [{{RFC4211}}].
@@ -99,9 +99,9 @@ evidence within PKCS#10 [{{RFC2986}}] or Certificate Request Message Format (CRM
 The content and encoding of this evidence in a CSR are not constrained by [{{I-D.ietf-lamps-csr-attestation}}].
 Hence, it is possible to use the Entity Attestation Token (EAT) {{I-D.ietf-rats-eat}} or, when a DER-based
 encoding of claims is desired, {{I-D.ietf-rats-pkix-evidence}}. For the latter, ASN.1 {{X.680}}{{RFC5912}} is used
-to describe the claims and for EATs the claims are defined in CDDL.
+to describe the claims, and for EATs the claims are defined in CDDL.
 
-This specification defines the architecture of key attestation and registers claims for use with {{I-D.ietf-rats-eat}}
+This specification defines the architecture for performing key attestation and registers claims for use with {{I-D.ietf-rats-eat}}
 and {{I-D.ietf-rats-pkix-evidence}}.
 
 # Terminology
@@ -129,9 +129,9 @@ state of the platform.
 
 Key Attestation:
 : Evidence containing properties of the environment(s) in which the private
-keys are stored. For example, a Relying Party may want to know whether
+keys are generated and stored. For example, a Relying Party may want to know whether
 a private key is stored in a hardware security module and cannot be
-exported in unencrypted fashion.
+exported in cleartext.
 
 Key Attestation Key (KAK):
 : An AK used specifically for signing KATs. In some systems only a
@@ -144,7 +144,7 @@ Token.  The IK is protected by the RoT.
 
 Usage Protocol:
 : A (security) protocol that requires demonstrating possession of the
-private IK.
+private component of the IK.
 
 Attestation Token (AT):
 : A collection of claims that a RoT assembles (and signs) with the
@@ -198,7 +198,7 @@ and implementations may combine them into a single physical entity.
 
 Security-sensitive functionality, like attestation, has to be placed
 into the Root of Trust (RoT). Since the RoT itself
-may be implemented as part of different layers, the design allows platform
+may be comprised of different components, the design allows platform
 attestation to be separated from key attestation whereby platform
 attestation is more privileged than the key attestation code.
 Cryptographic services, used by key attestation and by platform
@@ -206,7 +206,7 @@ attestation, are typically part of separate components within the RoT
 but they are not shown in the figure.
 
 The protocol used for communication between the Presenter and the
-Recipient is referred as usage protocol. The usage protocol, which is
+Recipient is referred as the Usage Protocol. The Usage Protocol, which is
 outside the scope of this specification, needs to support
 proof-of-possession of the private key (explained further below).
 Examples of usage protocols are attested TLS {{I-D.fossati-tls-attestation}}
