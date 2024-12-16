@@ -49,6 +49,10 @@ author:
     abbrev: H-BRS
     country: Germany
     email: Hannes.Tschofenig@gmx.net
+  - name: Ned Smith
+    organization: Intel Corporation
+    country: USA
+    email: ned.smith@intel.com
 
 normative:
   RFC2119:
