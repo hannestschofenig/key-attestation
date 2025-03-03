@@ -87,8 +87,7 @@ normative:
   PKCS11:
     title: "PKCS #11 Specification Version 3.1"
     author:
-      name: Dieter Bong
-      name: Tony Cox
+      name: Dieter Bong, Tony Cox
       org: OASIS PKCS 11 TC
       date: 11 August 2022
     target: https://docs.oasis-open.org/pkcs11/pkcs11-spec/v3.1/cs01/pkcs11-spec-v3.1-cs01.html
